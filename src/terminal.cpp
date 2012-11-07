@@ -89,5 +89,5 @@ bool Terminal::execFile(QString filePath) {
 }
 
 void Terminal::execVersion() {
-    std::cout << JSWEBSCRAPE_VERSION_STRING << std::endl;
+    std::cout << GUAXINIMJS_VERSION_STRING << std::endl;
 }
