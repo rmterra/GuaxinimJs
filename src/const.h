@@ -1,0 +1,12 @@
+#ifndef CONST_H
+#define CONST_H
+
+//Current version 0.0.0.0
+#define JSWEBSCRAPE_VERSION_MAJOR 0
+#define JSWEBSCRAPE_VERSION_MINOR 0
+#define JSWEBSCRAPE_VERSION_PATCH 0
+#define JSWEBSCRAPE_VERSION_REVISION 0
+
+#define JSWEBSCRAPE_VERSION_STRING "0.0.0.0 (development)"
+
+#endif // CONST_H
