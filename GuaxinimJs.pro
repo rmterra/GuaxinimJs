@@ -1,9 +1,3 @@
-#-------------------------------------------------
-#
-# Project created by QtCreator 2012-10-15T21:35:30
-#
-#-------------------------------------------------
-
 QT       += core gui webkit network script
 
 TARGET = GuaxinimJs
