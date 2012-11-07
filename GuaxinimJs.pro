@@ -16,7 +16,7 @@ win32: OBJECTS_DIR = build/.o/win32
 AUTHOR = Ricardo Miranda Terra
 EMAIL = r.mirandaterra@gmail.com
 LANGUAGE = C++/Javascript
-LICENSE = TDB
+LICENSE = BSD LICENSE
 
 
 MOC_DIR = build/.moc
@@ -35,7 +35,7 @@ SOURCES += \
 	src/utils.cpp \
 	src/requestparams.cpp \
 	src/webpage.cpp \
-    src/jsonparser.cpp
+	src/jsonparser.cpp
 
 HEADERS  += \
 	src/jsws.h \
@@ -44,4 +44,4 @@ HEADERS  += \
 	src/const.h \
 	src/requestparams.h \
 	src/webpage.h \
-    src/jsonparser.h
+	src/jsonparser.h
