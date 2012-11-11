@@ -1,5 +1,4 @@
 #include <QVariant>
-#include <QScriptValue>
 
 #include "requestparams.h"
 

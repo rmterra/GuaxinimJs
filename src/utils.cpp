@@ -7,7 +7,7 @@
 #include <iostream>
 
 //PUBLIC STATIC
-QString Utils::getFileContent(QString filePath) {
+QString Utils::getContent(QString filePath) {
     if(!QFile::exists(filePath)) {
         std::cout << "File not found..." << std::endl;
         return "";
@@ -26,7 +26,7 @@ QString Utils::getFileContent(QString filePath) {
     return fileContent;
 }
 
-bool Utils::isFileFromExtension(QString filePath, QString extension) {
+bool Utils::isExtension(QString filePath, QString extension) {
     QFileInfo fileInfo(filePath);
     if(fileInfo.suffix() == extension) {
         return true;

@@ -1,12 +1,12 @@
 #ifndef WEBREQUEST_H
 #define WEBREQUEST_H
 
-#include <QObject>
-#include <QNetworkAccessManager>
-#include <QScriptValue>
 #include <QUrl>
 #include <QMap>
+#include <QObject>
+#include <QScriptValue>
 #include <QScriptEngine>
+#include <QNetworkAccessManager>
 
 class WebRequest : public QObject
 {
@@ -23,6 +23,9 @@ private:
     QScriptValue m_onSuccess;
     QScriptValue m_onError;
     QNetworkAccessManager* m_manager;
+
+private:
+    void configHeaders(QNetworkRequest*);
 
 public slots:
     void sendRequest();

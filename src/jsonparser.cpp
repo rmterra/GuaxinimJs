@@ -1,5 +1,4 @@
 #include <QScriptValueIterator>
-#include <QMap>
 
 #include "jsonparser.h"
 

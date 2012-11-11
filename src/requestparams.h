@@ -1,8 +1,8 @@
 #ifndef REQUESTPARAMS_H
 #define REQUESTPARAMS_H
 
-#include <QObject>
 #include <QMap>
+#include <QObject>
 #include <QScriptValue>
 
 #define ASYNC "async"

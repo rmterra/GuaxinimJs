@@ -1,8 +1,8 @@
 #ifndef JSONPARSER_H
 #define JSONPARSER_H
 
-#include <QObject>
 #include <QMap>
+#include <QObject>
 #include <QScriptValue>
 
 class JSONParser : public QObject

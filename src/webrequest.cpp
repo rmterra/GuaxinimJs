@@ -1,9 +1,9 @@
 #include <QDebug>
 #include <QNetworkReply>
-#include <QScriptEngine>
 
 #include "webrequest.h"
 #include "src/jsonparser.h"
+#include "src/const.h"
 
 //PUBLIC METHODS
 
@@ -26,6 +26,20 @@ WebRequest::WebRequest(QScriptEngine *engine, QScriptValue parameters)
     this->m_argsMap = JSONParser::toMap(parameters.property("data"));
 }
 
+//PRIVATE METHODS
+
+void WebRequest::configHeaders(QNetworkRequest* request) {
+    request->setRawHeader("Accept", "application/json, text/javascript, */*; q=0.01");
+    request->setRawHeader("Accept-Charset", "ISO-8859-1, utf-8; q=0.7, *; q=0.3");
+    request->setRawHeader("Accept-Encoding", "gzip, deflate, sdch");
+    request->setRawHeader("Accept-Language", "en-US, en; q=0.8");
+
+    QByteArray userAgent = "GuaxinimJs ";
+    userAgent.append(GUAXINIMJS_VERSION_STRING);
+
+    request->setRawHeader("User-Agent", userAgent);
+}
+
 //PUBLIC SLOTS
 
 void WebRequest::sendRequest() {
@@ -34,12 +48,7 @@ void WebRequest::sendRequest() {
     }
 
     QNetworkRequest request(this->m_url);
-
-    request.setRawHeader("Accept", "application/json, text/javascript, */*; q=0.01");
-    request.setRawHeader("Accept-Charset", "ISO-8859-1, utf-8; q=0.7, *; q=0.3");
-    request.setRawHeader("Accept-Encoding", "gzip, deflate, sdch");
-    request.setRawHeader("Accept-Language", "en-US, en; q=0.8");
-    request.setRawHeader("User-Agent", "GuaxinimJs 1.0.0.0");
+    configHeaders(&request);
 
     connect(this->m_manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(executeFinished(QNetworkReply*)));
     this->m_manager->sendCustomRequest(request, this->m_verb);
@@ -55,6 +64,5 @@ void WebRequest::executeFinished(QNetworkReply* reply) {
 
     QString result = reply->readAll();
     QScriptValue json = this->m_engine->evaluate("("+ result +")");
-
     this->m_onSuccess.call(QScriptValue(), QScriptValueList() << json);
 }

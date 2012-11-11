@@ -58,14 +58,14 @@ void Terminal::execHelp() {
 }
 
 bool Terminal::execFile(QString filePath) {
-    if(!Utils::isFileFromExtension(filePath, QString("js"))) {
+    if(!Utils::isExtension(filePath, QString("js"))) {
         std::cout << "File Invalid..."
                   << std::endl
                   << "Acceptable extension *.js";
         return false;
     }
 
-    QString script = Utils::getFileContent(filePath);
+    QString script = Utils::getContent(filePath);
 
     if(script.isEmpty()) { return false; }
 

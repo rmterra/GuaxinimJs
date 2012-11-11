@@ -3,11 +3,11 @@
 
 #include <iostream>
 
-#include <QObject>
 #include <QFile>
+#include <QObject>
+#include <QFileInfo>
 #include <QTextStream>
 #include <QStringList>
-#include <QFileInfo>
 #include <QScriptEngine>
 
 #include <src/const.h>

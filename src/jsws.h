@@ -6,9 +6,8 @@
 #include <QObject>
 #include <QWebView>
 #include <QWebPage>
-#include <QPointer>
-#include <QScriptEngine>
 #include <QScriptValue>
+#include <QScriptEngine>
 
 #include <src/requestparams.h>
 #include <src/webpage.h>
@@ -52,6 +51,7 @@ private:
     void proccessSync();
 
 public slots:
+    void scrape(QString, QScriptValue);
     void scrape(QStringList, QScriptValue);
     void request(QScriptValue);
 

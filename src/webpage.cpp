@@ -1,9 +1,8 @@
 #include <iostream>
 
-#include <QWebFrame>
-#include <QScriptValue>
 #include <QDebug>
 #include <QFileInfo>
+#include <QWebFrame>
 
 #include "src/webpage.h"
 #include "src/utils.h"
@@ -36,7 +35,6 @@ void WebPage::evaluate(QString script) {
 
 void WebPage::evaluate(QScriptValue args, QString script) {
     QString finalScript("(%1).call(%2);");
-
     QString json = JSONParser::toString(args);
 
     finalScript = finalScript.arg(script, json);
@@ -44,11 +42,11 @@ void WebPage::evaluate(QScriptValue args, QString script) {
 }
 
 QScriptValue WebPage::inject(QString file) {
-    if(!Utils::isFileFromExtension(file, QString("js"))) {
+    if(!Utils::isExtension(file, QString("js"))) {
         return QScriptValue(false);
     }
 
-    QString script = Utils::getFileContent(file);
+    QString script = Utils::getContent(file);
 
     if(script.isEmpty()) { return false; }
 
@@ -64,11 +62,12 @@ void WebPage::setHtml(QString file) {
         return;
     }
 
-    if(!Utils::isFileFromExtension(file, QString("html"))) {
+    if(!Utils::isExtension(file, QString("html")) ||
+       !Utils::isExtension(file, QString("htm"))) {
         std::cout << "Invalid file " << file.toAscii().constData() << std::endl;
         return;
     }
 
-    QString content = Utils::getFileContent(file);
+    QString content = Utils::getContent(file);
     this->m_page->mainFrame()->setHtml(content);
 }

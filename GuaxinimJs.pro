@@ -20,8 +20,7 @@ OTHER_FILES += \
 	examples/*.html \
 	examples/*.css \
 	examples/libs/*.js	\
-	assets/*.* \
-    examples/fichalimpa.js
+	assets/*.*
 
 SOURCES += \
 	src/main.cpp \
@@ -31,7 +30,7 @@ SOURCES += \
 	src/requestparams.cpp \
 	src/webpage.cpp \
 	src/jsonparser.cpp \
-    src/webrequest.cpp
+	src/webrequest.cpp
 
 HEADERS  += \
 	src/jsws.h \
@@ -41,4 +40,4 @@ HEADERS  += \
 	src/requestparams.h \
 	src/webpage.h \
 	src/jsonparser.h \
-    src/webrequest.h
+	src/webrequest.h

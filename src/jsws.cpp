@@ -1,12 +1,9 @@
 #include <QDebug>
-#include <QApplication>
-#include <QWebPage>
 #include <QWebFrame>
-#include <QScriptEngine>
-#include <QScriptValue>
-#include <QNetworkAccessManager>
-#include <QNetworkRequest>
+#include <QApplication>
 #include <QNetworkReply>
+#include <QNetworkRequest>
+#include <QNetworkAccessManager>
 
 #include <src/jsws.h>
 #include <src/webpage.h>
@@ -73,8 +70,9 @@ void Jsws::configPage(QWebPage *page) {
 
     settings->setAttribute(QWebSettings::JavascriptEnabled, true);
     settings->setAttribute(QWebSettings::AutoLoadImages, true);
-    settings->setAttribute(QWebSettings::PluginsEnabled, false);
+
     settings->setAttribute(QWebSettings::JavaEnabled, false);
+    settings->setAttribute(QWebSettings::PluginsEnabled, false);
     settings->setAttribute(QWebSettings::JavascriptCanOpenWindows, false);
     settings->setAttribute(QWebSettings::JavascriptCanCloseWindows, false);
     settings->setAttribute(QWebSettings::JavascriptCanAccessClipboard, false);
@@ -85,16 +83,12 @@ void Jsws::proccessAsync() {
         QWebPage *page = this->m_pages.value(url);
         connect(page, SIGNAL(loadProgress(int)), this, SLOT(pageLoadProgress(int)));
         connect(page, SIGNAL(loadFinished(bool)), this, SLOT(pageLoadFinished(bool)));
-        qDebug() << QString("Loading %1").arg(url);
         page->mainFrame()->setUrl(QUrl(url));
     }
 }
 
 void Jsws::proccessSync() {
-    if(this->m_pages.count() == 0) {
-        //TODO ERROR
-    }
-    if(this->m_keyPosition >= this->m_pages.count()) {
+    if(this->m_pages.count() == 0 || this->m_keyPosition >= this->m_pages.count()) {
         emit completeScrape();
         return;
     }
@@ -104,25 +98,28 @@ void Jsws::proccessSync() {
     connect(this->m_nextWebPage, SIGNAL(loadProgress(int)), this, SLOT(pageLoadProgress(int)));
     connect(this->m_nextWebPage, SIGNAL(loadFinished(bool)), this, SLOT(pageLoadFinished(bool)));
     QUrl url(this->m_pages.key(this->m_nextWebPage));
-    qDebug() << QString("Loading %1").arg(url.toString());
-
     this->m_nextWebPage->mainFrame()->setUrl(url);
 }
 
 //PUBLIC SLOTS
 
+void Jsws::scrape(QString url, QScriptValue args) {
+    scrape(QStringList() << url, args);
+}
+
 void Jsws::scrape(QStringList urls, QScriptValue args) {
     try {
-        qDebug("Entered on Scrape");
+        qDebug() << "Entered on Scrape";
         if(urls.isEmpty()) {
-            qDebug("URL vector is empty... Aborting operation");
+            qDebug() << "URL vector is empty... Aborting operation";
             return;
         }
 
         if(!args.isObject()) {
-            qDebug("Arguments in incorrect format... Aborting operation");
+            qDebug() << "Arguments in incorrect format... Aborting operation";
             return;
         }
+
         this->m_defaultParams = RequestParams::fromScriptObject(args);
         this->m_keyPosition = 0;
 
@@ -186,6 +183,7 @@ void Jsws::pageLoadProgress(int progress) {
     if(callback.isNull() || callback.isUndefined()) {
         return;
     }
+
     QWebPage *page = qobject_cast<QWebPage *>(QObject::sender());
     QScriptValue ctx = this->m_engine->globalObject().property("WS");
     QString host = page->mainFrame()->baseUrl().host();
@@ -212,8 +210,8 @@ void Jsws::pageLoadFinished(bool success) {
     if(!this->m_defaultParams->isAsync()) {
         this->m_keyPosition++;
         this->proccessSync();
-    }
-    else {
+
+    } else {
         if(++this->m_keyPosition == this->m_pages.count()) {
             emit completeScrape();
             return;

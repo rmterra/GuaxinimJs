@@ -10,8 +10,8 @@ class Utils : public QObject
     Q_OBJECT
 
 public:
-    static QString getFileContent(QString);
-    static bool isFileFromExtension(QString, QString);
+    static QString getContent(QString);
+    static bool isExtension(QString, QString);
 
 private:
 
