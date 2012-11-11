@@ -160,7 +160,6 @@ void Jsws::render(int width, int height) {
     view->setPage(this->m_page->page());
     view->setFixedWidth(width);
     view->setFixedHeight(height);
-    QApplication::setQuitOnLastWindowClosed(false);
     view->show();
 }
 
