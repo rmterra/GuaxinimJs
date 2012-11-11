@@ -2,6 +2,7 @@
 #define JSONPARSER_H
 
 #include <QObject>
+#include <QMap>
 #include <QScriptValue>
 
 class JSONParser : public QObject
@@ -10,6 +11,7 @@ class JSONParser : public QObject
 
 public:
     static QString toString(QScriptValue);
+    static QMap<QString, QString> toMap(QScriptValue);
 
 };
 

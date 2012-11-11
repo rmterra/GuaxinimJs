@@ -1,4 +1,5 @@
 #include <QScriptValueIterator>
+#include <QMap>
 
 #include "jsonparser.h"
 
@@ -33,4 +34,18 @@ QString JSONParser::toString(QScriptValue json) {
 
     QString finalParse("{ %1 }");
     return finalParse.arg(jsonParsed);
+}
+
+QMap<QString, QString> JSONParser::toMap(QScriptValue json) {
+    QMap<QString, QString> map;
+    QScriptValueIterator iterator(json);
+
+    if(!json.isObject()) return map;
+
+    while(iterator.hasNext()) {
+        iterator.next();
+        map.insert(iterator.name(), iterator.value().toString());
+    }
+
+    return map;
 }

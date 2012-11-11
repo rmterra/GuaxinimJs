@@ -72,10 +72,10 @@ bool Terminal::execFile(QString filePath) {
     QScriptSyntaxCheckResult result = this->m_engine->checkSyntax(script);
 
     if(result.state() == QScriptSyntaxCheckResult::Error) {
-        QString error("Error on line %1 column %2 \n Message: %3");
-        error.arg(QString::number(result.errorLineNumber()),
-                  QString::number(result.errorColumnNumber()),
-                  result.errorMessage());
+        QString error("Error on line %1 column %2\nMessage: %3");
+        error = error.arg(QString::number(result.errorLineNumber()),
+                          QString::number(result.errorColumnNumber()),
+                          result.errorMessage());
 
         std::cout << error.toAscii().constData() << std::endl;
         return false;

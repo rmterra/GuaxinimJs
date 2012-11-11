@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
     QApplication *app = new QApplication(argc, argv);
     QStringList args = app->arguments();
 
-    app->setWindowIcon(QIcon(":/racccoon.png"));
+    app->setWindowIcon(QIcon("racccoon.png"));
     app->setApplicationName("GuaxinimJs");
     app->setApplicationVersion(GUAXINIMJS_VERSION_STRING);
 

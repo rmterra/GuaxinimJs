@@ -4,9 +4,13 @@
 #include <QWebFrame>
 #include <QScriptEngine>
 #include <QScriptValue>
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
 
 #include <src/jsws.h>
 #include <src/webpage.h>
+#include <src/webrequest.h>
 
 //PUBLIC CONSTRUCTORS
 
@@ -138,8 +142,9 @@ void Jsws::scrape(QStringList urls, QScriptValue args) {
     }
 }
 
-void Jsws::request(QScriptValue) {
-
+void Jsws::request(QScriptValue args) {
+    WebRequest *request = new WebRequest(this->m_engine, args);
+    request->sendRequest();
 }
 
 void Jsws::toPdf(QString) {

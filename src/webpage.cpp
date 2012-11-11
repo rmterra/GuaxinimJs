@@ -3,6 +3,7 @@
 #include <QWebFrame>
 #include <QScriptValue>
 #include <QDebug>
+#include <QFileInfo>
 
 #include "src/webpage.h"
 #include "src/utils.h"
@@ -56,6 +57,13 @@ QScriptValue WebPage::inject(QString file) {
 }
 
 void WebPage::setHtml(QString file) {
+    QFileInfo fileInfo(file);
+
+    if(!fileInfo.isFile()) {
+        this->m_page->mainFrame()->setHtml(file);
+        return;
+    }
+
     if(!Utils::isFileFromExtension(file, QString("html"))) {
         std::cout << "Invalid file " << file.toAscii().constData() << std::endl;
         return;
