@@ -12,6 +12,8 @@ EMAIL = r.mirandaterra@gmail.com
 LANGUAGE = C++/Javascript
 LICENSE = BSD LICENSE
 
+#FOR WINDOWS REMOVE THIS PATH AND INCLUDE YOUR PROJECT DIRECTORY
+win32: INCLUDEPATH += D:\WinDevelop\QT\rmterra-GuaxinimJs
 
 MOC_DIR = build/.moc
 
