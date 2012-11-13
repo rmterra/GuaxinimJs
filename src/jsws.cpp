@@ -173,6 +173,8 @@ void Jsws::clrscr() {
 }
 
 void Jsws::exit() {
+    qDeleteAll(m_pages);
+    m_pages.clear();
     QApplication::instance()->exit();
 }
 
@@ -221,6 +223,10 @@ void Jsws::pageLoadFinished(bool success) {
 
 void Jsws::executeCompleteScrape() {
     QScriptValue callback = this->m_defaultParams->complete();
+
+    qDeleteAll(m_pages);
+    m_pages.clear();
+
     if(callback.isNull() || callback.isUndefined()) {
         return;
     }

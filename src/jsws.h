@@ -63,12 +63,12 @@ public slots:
     void print(QString);
     void clrscr();
 
+    void exit();
 
 private slots:
     void pageLoadProgress(int);
     void pageLoadFinished(bool);
     void executeCompleteScrape();
-    void exit();
 
 signals:
     void completeScrape();
