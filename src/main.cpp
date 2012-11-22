@@ -31,7 +31,7 @@
 #include <QStringList>
 
 #include <src/terminal.h>
-#include <src/const.h>
+#include <src/const.h> 
 
 int main(int argc, char *argv[])
 {
@@ -50,7 +50,8 @@ int main(int argc, char *argv[])
 
     int retVal = terminal->appReturn();
     delete terminal;
-#ifdef WINDOWS
+    delete app;
+#ifdef WIN32
     return retVal;
 #else
     return (retVal);

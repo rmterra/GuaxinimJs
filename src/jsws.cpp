@@ -130,10 +130,6 @@ void Jsws::proccessSync() {
 
 //PUBLIC SLOTS
 
-void Jsws::scrape(QString url, QScriptValue args) {
-    scrape(QStringList() << url, args);
-}
-
 void Jsws::scrape(QStringList urls, QScriptValue args) {
     try {
         qDebug() << "Entered on Scrape";
@@ -189,14 +185,6 @@ void Jsws::render(int width, int height) {
 
 void Jsws::print(QString message) {
     std::cout << message.toAscii().constData() << std::endl;
-}
-
-void Jsws::clrscr() {
-#ifdef WINDOWS
-    system("CLS");
-#else
-    system("clear");
-#endif
 }
 
 void Jsws::exit() {

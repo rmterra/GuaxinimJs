@@ -40,10 +40,11 @@ Terminal::Terminal(QObject *parent)
 
 bool Terminal::execute(QStringList args) {
 
-    if(args.count() == NO_ARGUMENTS_COUNT) {
-        execInteractiveInstance();
-        return true;
-    }
+//    TODO
+//    if(args.count() == NO_ARGUMENTS_COUNT) {
+//        execInteractiveInstance();
+//        return true;
+//    }
 
     for(int i = 1; i < args.count(); i++) {
         std::string str = args[i].toLocal8Bit().constData();
@@ -58,10 +59,10 @@ bool Terminal::execute(QStringList args) {
             return result;
         }
 
-        if(str == "--version" || str == "-v") { execVersion(); return true; }
-        if(str == "--help" || str == "-h") { execHelp(); return true; }
+        if(str == "--version" || str == "-v") { execVersion(); return false; }
+        if(str == "--help" || str == "-h") { execHelp(); return false; }
     }
-    std::cout << "JsWebScrape: invalid option.\n";
+    std::cout << "JsWebScrape: invalid option." << std::endl;
     std::cout << "Try './JsWebScrape --help' for more information." << std::endl;
     return false;
 }
@@ -117,4 +118,5 @@ bool Terminal::execFile(QString filePath) {
 
 void Terminal::execVersion() {
     std::cout << GUAXINIMJS_VERSION_STRING << std::endl;
+
 }

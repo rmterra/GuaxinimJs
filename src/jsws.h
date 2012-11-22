@@ -109,14 +109,6 @@ private:
 
 public slots:
     /**
-      * Start the web scrape/crawling proccess based on a url
-      *
-      * @brief scrape
-      * @param url
-      * @param options
-      */
-    void scrape(QString url, QScriptValue options);
-    /**
       * Start the web scrape/crawling proccess based on a list of url
       *
       * @brief scrape
@@ -132,7 +124,6 @@ public slots:
     void render(int, int);
 
     void print(QString);
-    void clrscr();
 
     void exit();
 
